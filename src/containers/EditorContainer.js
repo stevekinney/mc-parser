@@ -23,7 +23,7 @@ export default connect(mapStateToProps, markupActions)(({ markup, updateMarkup }
       onChange={updateMarkup}
       height="100%"
       editorProps={{$blockScrolling: true}}
-      value={markup}
+      value={markup.markup}
     />
   );
 });

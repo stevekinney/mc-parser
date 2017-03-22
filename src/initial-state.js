@@ -1,3 +1,5 @@
+import { DomHandler, Parser } from 'htmlparser2';
+
 const markup = (
 `
 <div>
@@ -7,8 +9,14 @@ const markup = (
 `
 ).trim();
 
+const handler = new DomHandler();
+new Parser(handler).end(markup);
+
 const initialState = {
-  markup
+  markup: {
+    markup,
+    ast: handler.dom
+  }
 };
 
 export default initialState;
