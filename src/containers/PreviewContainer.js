@@ -10,7 +10,7 @@ const mapStateToProps = ({ markup }) => {
 
 export default connect(mapStateToProps)(({ markup }) => {
   const handler = new DomHandler();
-  const parser = new Parser(handler).end(markup);
+  new Parser(handler).end(markup);
 
   return (
     <pre style={ { height: '100vh', fontFamily: 'monospace', overflow: 'scroll' } }>
