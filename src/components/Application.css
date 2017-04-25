@@ -3,12 +3,6 @@
   height: 100vh;
 }
 
-.Sidebar {
-  flex: 3;
-  min-width: 300px;
-  margin-right: 20px;
-}
-
 .Preview {
-  flex: 9;
+  padding: 2em;
 }

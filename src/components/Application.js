@@ -7,7 +7,7 @@ import './Application.css';
 const Application = () => {
   return (
     <main className="Application container">
-      <section className="Sidebar">
+      <section className="Editor">
         <EditorContainer />
       </section>
       <section className="Preview">

@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 
 import * as markupActions from '../actions/markup';
 
-import JSON from 'circular-json';
-
-const mapStateToProps = ({ markup }) => {
-  return { markup };
-};
+const mapStateToProps = ({ markup }) => ({ markup });
 
 export default connect(mapStateToProps, markupActions)(({ markup, updateAst }) => {
+  const { ast } = markup;
   return (
-    <textarea style={ { height: '100vh', fontFamily: 'monospace', overflow: 'scroll' } } value={ JSON.stringify(markup.ast, null, 2) } onKeyUp={(event) => updateAst(event.target.value)} />
+    <ul>
+      {ast.map((node, index) => <li key={index}>{node.name}</li>)}
+    </ul>
   );
 });
