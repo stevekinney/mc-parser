@@ -1,16 +1,11 @@
-import { DomHandler, Parser } from 'htmlparser2';
 import html from 'htmlparser-to-html';
+import parse from '../lib/html-parser';
 
-export const updateMarkup = (markup) => {
-  const handler = new DomHandler();
-  new Parser(handler).end(markup);
-
-  return {
-    type: 'UPDATE_MARKUP',
-    ast: handler.dom,
-    markup,
-  };
-};
+export const updateMarkup = markup => ({
+  type: 'UPDATE_MARKUP',
+  ast: parse(markup),
+  markup,
+});
 
 export const updateAst = ast => ({
   type: 'UPDATE_MARKUP',

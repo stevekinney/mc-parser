@@ -1,26 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// eslint-disable-next-line
-import brace from 'brace';
-// eslint-disable-next-line
-import AceEditor from 'react-ace';
-
-import 'brace/mode/html';
-import 'brace/theme/tomorrow_night';
+import Editor from '../components/Editor';
 
 import * as markupActions from '../actions/html';
+import * as editorActions from '../actions/editor';
 
-const mapStateToProps = ({ html }) => ({ html });
+const mapStateToProps = ({ html, editor }) => ({ html, editor });
+const actions = { ...markupActions, ...editorActions };
 
-export default connect(mapStateToProps, markupActions)(({ html, updateMarkup }) => (
-  <AceEditor
-    mode="html"
-    theme="tomorrow_night"
-    tabSize={2}
-    onChange={updateMarkup}
-    height="100%"
-    editorProps={{ $blockScrolling: true }}
-    value={html.markup}
-  />
-  ));
+export default connect(mapStateToProps, actions)(props => (
+  <Editor {...props} />
+));

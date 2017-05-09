@@ -11,7 +11,7 @@ export const emailAttributes = {
 };
 
 export default function injectReactEmailAttributes() {
-  if (DOMProperty.properties.hasOwnProperty('xmlns')) {
+  if (Object.hasOwnProperty.call(DOMProperty.properties, 'xmlns')) {
     delete emailAttributes.Properties.xmlns;
   }
 
