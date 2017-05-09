@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import markup from './markup';
+import html from './html';
 
 const reducer = combineReducers({
-  markup
+  html,
 });
 
 export default reducer;

@@ -1,15 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as markupActions from '../actions/markup';
+import toNode from '../lib/to-node';
+import * as markupActions from '../actions/html';
 
-const mapStateToProps = ({ markup }) => ({ markup });
+const mapStateToProps = ({ html }) => ({ html });
 
-export default connect(mapStateToProps, markupActions)(({ markup, updateAst }) => {
-  const { ast } = markup;
-  return (
-    <ul>
-      {ast.map((node, index) => <li key={index}>{node.name}</li>)}
-    </ul>
-  );
+export default connect(mapStateToProps, markupActions)(({ html }) => {
+  const { ast } = html;
+  return <div className="Preview">{ast.map(toNode)}</div>;
 });

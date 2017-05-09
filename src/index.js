@@ -17,7 +17,7 @@ import './index.css';
 const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(...enhancers)
+  composeEnhancers(...enhancers),
 );
 
 injectEmailProperties();
@@ -26,5 +26,5 @@ ReactDOM.render(
   <Provider store={store}>
     <Application />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

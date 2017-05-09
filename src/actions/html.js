@@ -8,14 +8,12 @@ export const updateMarkup = (markup) => {
   return {
     type: 'UPDATE_MARKUP',
     ast: handler.dom,
-    markup
+    markup,
   };
 };
 
-export const updateAst = (ast) => {
-  return {
-    type: 'UPDATE_MARKUP',
-    ast,
-    markup: html(JSON.parse(ast))
-  };
-}
+export const updateAst = ast => ({
+  type: 'UPDATE_MARKUP',
+  ast,
+  markup: html(JSON.parse(ast)),
+});

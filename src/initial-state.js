@@ -13,10 +13,10 @@ const handler = new DomHandler();
 new Parser(handler).end(markup);
 
 const initialState = {
-  markup: {
+  html: {
     markup,
-    ast: handler.dom
-  }
+    ast: handler.dom,
+  },
 };
 
 export default initialState;
