@@ -7,6 +7,15 @@ export default function markupReducer(state = initialState.editor, action) {
         isSelecting: true,
         cursorPosition: action.cursorPosition,
       };
+    case 'RELEASE_SELECTION':
+      return {
+        isSelecting: false,
+      };
+    case 'UPDATE_CURSOR_POSITION':
+      return {
+        isSelecting: false,
+        cursorPosition: action.cursorPosition,
+      };
     default:
       return state;
   }

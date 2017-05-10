@@ -8,7 +8,6 @@ So, what's going on here? Supiciously, not much. (Despite what it might look lik
    starting and ending indices of each node in the original HTML markup.
 2. We're abstracting some of the more tedious parts of setting up a parser with
    the parse() method.
-3. We're coming up with an arbitrary key to get React off our backs. This should be changed.
 
 */
 
@@ -28,9 +27,19 @@ class Handler extends DomHandler {
     });
   }
 
+  _setEnd(elem) {
+    elem.endIndex = this._parser.endIndex + 1;
+  }
+
+  onprocessinginstruction(name, data) {
+    this._parser.endIndex = this._parser._tokenizer._index;
+    super.onprocessinginstruction(name, data);
+  }
+
   _addDomElement(elem) {
     elem.key = count++;
     super._addDomElement(elem);
+    this._setEnd(elem);
   }
 }
 

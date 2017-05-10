@@ -17,21 +17,25 @@ export default class Editor extends Component {
 
   componentDidMount() {
     this.ace.editor.selection.on('changeCursor', () => {
-      this.props.setSelection(this.ace.editor.selection.getRange());
+      const cursorPosition = this.ace.editor.selection.getRange();
+      this.props.updateCursorPosition(cursorPosition);
     });
   }
 
   componentWillReceiveProps(newProps) {
-    this.updateSelection(newProps);
+    if (newProps.editor.isSelecting) {
+      this.updateSelection(newProps);
+    }
   }
 
   updateCursorPosition(cursorPosition) {
     this.ace.editor.selection.setSelectionRange(cursorPosition);
   }
 
-  updateSelection({ editor }) {
+  updateSelection({ editor, releaseSelection }) {
     this.ace.editor.selection.setSelectionRange(editor.cursorPosition);
     this.ace.editor.focus();
+    releaseSelection();
   }
 
   render() {
