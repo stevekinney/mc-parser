@@ -20,11 +20,12 @@ const defaultOptions = {
 };
 
 class Handler extends DomHandler {
-  constructor() {
+  constructor(includeDataAttributes = true) {
     super({
       withStartIndices: true,
       withEndIndices: true,
     });
+    this.includeDataAttributes = includeDataAttributes;
   }
 
   _setEnd(elem) {
@@ -40,11 +41,25 @@ class Handler extends DomHandler {
     elem.key = count++;
     super._addDomElement(elem);
     this._setEnd(elem);
+
+    if (!elem.attribs) elem.attribs = {};
+
+    if (this.includeDataAttributes) {
+      elem.attribs['data-start-index'] = elem.startIndex;
+      elem.attribs['data-end-index'] = elem.endIndex;
+      elem.attribs['data-node-id'] = elem.key;
+      elem.attribs.contenteditable = true;
+    } else {
+      delete elem.attribs['data-start-index'];
+      delete elem.attribs['data-end-index'];
+      delete elem.attribs['data-node-id'];
+      delete elem.attribs.contenteditable;
+    }
   }
 }
 
-const parse = (code, options) => {
-  const handler = new Handler();
+const parse = (code, options = {}) => {
+  const handler = new Handler(options.includeDataAttributes);
   new Parser(handler, { ...defaultOptions, ...options }).end(code);
   return handler.dom;
 };

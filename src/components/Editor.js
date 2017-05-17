@@ -16,10 +16,7 @@ export default class Editor extends Component {
   }
 
   componentDidMount() {
-    this.ace.editor.selection.on('changeCursor', () => {
-      const cursorPosition = this.ace.editor.selection.getRange();
-      this.props.updateCursorPosition(cursorPosition);
-    });
+    this.ace.editor.selection.on('changeCursor', this.updateCursorPosition);
   }
 
   componentWillReceiveProps(newProps) {
@@ -28,13 +25,19 @@ export default class Editor extends Component {
     }
   }
 
-  updateCursorPosition(cursorPosition) {
+  componentWillUnmount() {
+    this.ace.editor.selection.off('changeCursor', this.updateCursorPosition);
+  }
+
+  updateCursorPosition() {
+    if (!this.ace) return;
+    const cursorPosition = this.ace.editor.selection.getRange();
     this.ace.editor.selection.setSelectionRange(cursorPosition);
   }
 
   updateSelection({ editor, releaseSelection }) {
+    if (!this.ace) return;
     this.ace.editor.selection.setSelectionRange(editor.cursorPosition);
-    this.ace.editor.focus();
     releaseSelection();
   }
 

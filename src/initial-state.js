@@ -2,7 +2,7 @@ import parse from './lib/html-parser';
 
 const markup = `
 <div>
-  <h1>Hello World</h1>
+  <h1 bgcolor="red">Hello World</h1>
   <p>Hi there</p>
 </div>`.trim();
 
