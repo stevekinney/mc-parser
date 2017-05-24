@@ -8,6 +8,7 @@ So, what's going on here? Supiciously, not much. (Despite what it might look lik
    starting and ending indices of each node in the original HTML markup.
 2. We're abstracting some of the more tedious parts of setting up a parser with
    the parse() method.
+3. Annotate the nodes with their start and end indices.
 
 */
 
